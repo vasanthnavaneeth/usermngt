@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Login Page</title>
+<title>Registration</title> 
 </head>
 <body>
-<form name="loginForm" method="post" action="login.php">
+<form name=registration" method="post" action="registration.php">
 <table width="50% bgcolor="0099CC" align="center">
 
 <tr>
-<td colspan=2><center><font size=4><b>HTML Login Page</b></font></center></td>
+<td colspan=2><center><font size=4><b>HTML registration Page</b></font></center></td>
 </tr>
 
 <tr>
@@ -18,12 +18,53 @@
 
 <tr>
 <td>Password:</td>
-<td><input type="pssword" size=25 name="pwd"></td>
+<td><input type="password" size=25 name="password"></td>
 </tr>
 
 <tr>
+<td>First Name:</td>
+<td><input type="text" size=25 name="firstname"></td>
+</tr>
+
+<tr>
+<td>Last Name:</td>
+<td><input type="text" size=25 name="lastname"></td>
+</tr>
+
+<tr>
+<td>Email:</td>
+<td><input type="text" size=25 name="email"></td>
+</tr>
+
+
+<tr>
+<td>Gender:</td>
+<td><input type="radio" name="gender" value="male" checked> Male<br>
+  <input type="radio" name="gender" value="female"> Female<br>
+  <input type="radio" name="gender" value="other"> Other</td>
+</tr>
+
+<tr>
+<td>DOB:</td>
+<td><input type="text" size=25 name="dob"></td>
+</tr>
+
+<tr>
+<td>Phone number:</td>
+<td><input type="text" size=25 name="phonenumber"></td>
+</tr>
+
+<tr>
+<td>Address:</td>
+<td><textarea rows="4" cols="50" name="address">
+</textarea>
+</td>
+</tr>
+
+
+<tr>
 <td ><input type="Reset"></td>
-<td><input type="submit" onclick="return check(this.form)" value="Login"></td>
+<td><input type="submit" onclick="return check(this.form)" value="Register"></td>
 </tr>
 
 </table>
@@ -43,6 +84,9 @@ else
 }
 }
 </script>
+
+
+
 
 </body>
 </html>
