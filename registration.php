@@ -47,80 +47,90 @@
 
         $urr = "";
         $updr = "";
-        
+
         $aaaa = "";
         $bbbb = "";
-        
+
         $cccc = "";
         $dddd = "";
 
         $eeee = "";
         $ffff = "";
-        
+
         $gggg = "";
         $hhhh = "";
-        
+
         $iiii = "";
         $jjjj = "";
-        
+
         $kkkk = "";
         $llll = "";
-        
-        
-        
-        
-        
 
-        
+        $addr = "";
+        $emp_name = "";
+        $cmp_name = "";
 
 
-        print_r($_POST);
+
+
+
+
+
+
+
+        //echo "<pre>";
+        //print_r($_POST);
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+            $f = 0;
 
             // valide username
             if (empty($_POST["userid"])) {
                 $urr = "Name is required";
+                $f = 1;
             } else {
                 $updr = test_input($_POST["userid"]);
             }
 
             // validete password
-            
-           if (empty($_POST["mahesh"])) {
-                $aaaa= "password is required";
+
+            if (empty($_POST["mahesh"])) {
+                $f = 1;
+                $aaaa = "password is required";
             } else {
                 $bbbb = test_input($_POST["mahesh"]);
-                
             }
-            
+
             //validate email
-                
+
             if (empty($_POST["email"])) {
+                $f = 1;
                 $cccc = "email is required";
             } else {
                 $dddd = test_input($_POST["email"]);
-                
             }
-                
-             //validate phone number
-                
+
+            //validate phone number
+
             if (empty($_POST["phonenumber"])) {
+                $f = 1;
                 $eeee = "phonenumber is required";
             } else {
                 $ffff = test_input($_POST["phonenumber"]);
             }
-                
-             //validate first name
-                
+
+            //validate first name
+
             if (empty($_POST["firstname"])) {
+                $f = 1;
                 $gggg = "firstname is required";
             } else {
                 $hhhh = test_input($_POST["firstname"]);
             }
-                
+
             //validate last name
-                
+
             if (empty($_POST["lastname"])) {
                 $jjjj = "lastname is required";
             } else {
@@ -128,16 +138,80 @@
             }
 
             //validate gender
-                
+
             if (empty($_POST["dob"])) {
                 $kkkk = "dob is required";
             } else {
                 $llll = test_input($_POST["dob"]);
             }
-              
-                
-                
+
+            $addr = test_input($_POST["address"]);
+            $emp_name = test_input($_POST["employeename"]);
+            $cmp_name = test_input($_POST["companyname"]);
+
+
+            if ($f == 0) {
+                // add to db
+
+                echo "success";
+                // INSERT INTO table_name (column1, column2, column3,...)
+                // VALUES (value1, value2, value3,...)
+                //$sql = "INSERT INTO table_name (column1, column2, column3,...) VALUES (value1, value2, value3,...)";                
+
                 /*
+                  id
+                 * 
+                  username
+                  password
+                  firstname
+                  lastname
+                  email
+                  gender
+                  dob
+                  phonenumber
+                  address
+                 * 
+                  status
+                  created_at
+                  updated_at
+                  deleted_at
+                 */
+                $sql = "INSERT INTO users (password,username,
+                    firstname,
+                    lastname,
+                    email,
+                    
+                    dob,
+                    phonenumber,
+                    address) VALUES ('$bbbb','$updr','$hhhh','$iiii','$dddd','$llll','$ffff','$addr');";
+                echo $sql;
+                $servername = "localhost";
+                $username = "root";
+                $password = "";
+                $dbname = "usermngt";
+
+                // Create connection
+                $conn = new mysqli($servername, $username, $password, $dbname);
+                // Check connection
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                }
+
+                //$sql = "INSERT INTO MyGuests (firstname, lastname, email)
+                //VALUES ('John', 'Doe', 'john@example.com')";
+
+                if ($conn->query($sql) === TRUE) {
+                    echo "New record created successfully";
+                } else {
+                    echo "Error: " . $sql . "<br>" . $conn->error;
+                }
+
+                $conn->close();
+            } else {
+                echo "fail";
+            }
+
+            /*
               if (empty($_POST["mahesh"])) {
               $passwordErr = "Password is required";
               } else {
@@ -265,26 +339,25 @@
 
                 <tr>
                     <td>Phone number:</td>
-                    <td><input type="text" size=25 name="phonenumber" value="<?php echo $email; ?>" ></td>
+                    <td><input type="text" size=25 name="phonenumber" value="<?php echo $ffff; ?>" ></td>
                 </tr>
 
                 <tr>
                     <td>Address:</td>
-                    <td><textarea rows="4" cols="50" name="address" value="<?php echo $email; ?>" >
-                        </textarea>
+                    <td><textarea rows="4" cols="50" name="address" ><?php echo $addr; ?></textarea>
                     </td>
                 </tr>
 
                 <tr>
                     <td>Company Name</td>
-                    <td><input type="text" size=25 name="comanyname" value="<?php echo $email; ?>" ></td>
+                    <td><input type="text" size=25 name="companyname" value="<?php echo $cmp_name; ?>" ></td>
                     </textarea>
                     </td>
                 </tr>
 
                 <tr>
                     <td>Employee Name</td>
-                    <td><input type="text" size=25 name="employeename" value="<?php echo $email; ?>" ></td>
+                    <td><input type="text" size=25 name="employeename" value="<?php echo $emp_name; ?>" ></td>
                     </textarea>
                     </td>
                 </tr>
